@@ -16,3 +16,5 @@ jobs:
       - name: Render mansucript
         run: |-
           Rscript -e "lapply(fs::dir_ls('assignment', glob='*.Rmd', recurse=TRUE), rmarkdown::render, envir = globalenv())"
+          
+          
