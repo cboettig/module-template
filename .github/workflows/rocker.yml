@@ -19,6 +19,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: PWD
+        run: |
+             pwd
+             ls
+
+
       - name: Render Rmarkdown files and Commit Results
         run: |
           RMD_PATH=$(find . -type f -name "*.Rmd")
