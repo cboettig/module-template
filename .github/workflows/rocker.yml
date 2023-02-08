@@ -8,7 +8,7 @@ on:
 name: rocker-rmarkdown
 
 jobs:
-  render-rmarkdown:
+  rocker-rmarkdown:
     runs-on: ubuntu-latest
     container:
       image: rocker/tidyverse:latest
@@ -25,7 +25,7 @@ jobs:
              echo $GITHUB_ACTOR
              echo $GITHUB_WORKSPACE
              pwd
-             ls *.git
+             ls .git/* || ls
 
       - name: Render Rmarkdown files
         run: |
