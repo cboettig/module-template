@@ -23,9 +23,11 @@ jobs:
       - name: debug
         run: |
              echo $GITHUB_ACTOR
-             echo $GITHUB_WORKSPACE
-             pwd
-             ls .git/* || ls
+             ls -l $GITHUB_WORKSPACE
+             whoami
+             RMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Rmd$'))
+             echo $RMD_PATH
+             echo ${RMD_PATH[*]/.Rmd/.md}
 
       - name: Render Rmarkdown files
         run: |
