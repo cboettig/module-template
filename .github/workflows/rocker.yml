@@ -23,6 +23,9 @@ jobs:
       - name: debug
         run: |
              echo $GITHUB_ACTOR
+             echo $GITHUB_WORKSPACE
+             pwd
+             ls *.git
 
       - name: Render Rmarkdown files
         run: |
@@ -30,7 +33,7 @@ jobs:
 
       - name: Commit Results
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git commit ${RMD_PATH[*]/.Rmd/.md} -m 'Re-build Rmarkdown files' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
