@@ -25,9 +25,8 @@ jobs:
              echo $GITHUB_ACTOR
              ls -l $GITHUB_WORKSPACE
              whoami
-             RMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Rmd$'))
-             echo $RMD_PATH
-             echo ${RMD_PATH[*]/.Rmd/.md}
+             ls -l .git
+
 
       - name: Render Rmarkdown files
         run: |
@@ -35,7 +34,8 @@ jobs:
 
       - name: Commit Results
         run: |
-          git config --global user.name "$GITHUB_ACTOR"
-          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          chmod g+w -R .git
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git commit *.md -m 'Re-build Rmarkdown files' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
